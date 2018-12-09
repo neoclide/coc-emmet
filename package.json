@@ -30,17 +30,17 @@
             "inMarkupAndStylesheetFilesOnly"
           ],
           "default": "always",
-          "markdownDescription": "%emmetShowExpandedAbbreviation%"
+          "markdownDescription": "Shows expanded Emmet abbreviations as suggestions."
         },
         "emmet.showAbbreviationSuggestions": {
           "type": "boolean",
           "default": true,
-          "markdownDescription": "%emmetShowAbbreviationSuggestions%"
+          "markdownDescription": "Shows possible Emmet abbreviations as suggestions. Not applicable in stylesheets or when emmet.showExpandedAbbreviation is 'never'."
         },
         "emmet.includeLanguages": {
           "type": "object",
           "default": {},
-          "markdownDescription": "%emmetIncludeLanguages%"
+          "markdownDescription": "Enable Emmet abbreviations in languages that are not supported by default. Add a mapping here between the language and emmet supported language.  E.g.: `{\"vue-html\": \"html\", \"javascript\": \"javascriptreact\"}`"
         },
         "emmet.variables": {
           "type": "object",
@@ -55,148 +55,106 @@
             }
           },
           "default": {},
-          "description": "%emmetVariables%"
+          "description": "Variables to be used in Emmet snippets"
         },
         "emmet.syntaxProfiles": {
           "type": "object",
           "default": {},
-          "description": "%emmetSyntaxProfiles%"
+          "description": "Define profile for specified syntax or use your own profile with specific rules."
         },
         "emmet.excludeLanguages": {
           "type": "array",
           "default": [
             "markdown"
           ],
-          "description": "%emmetExclude%"
-        },
-        "emmet.triggerExpansionOnTab": {
-          "type": "boolean",
-          "default": false,
-          "description": "%emmetTriggerExpansionOnTab%"
+          "description": "An array of languages where Emmet abbreviations should not be expanded."
         },
         "emmet.preferences": {
           "type": "object",
           "default": {},
-          "description": "%emmetPreferences%",
+          "description": "Preferences used to modify behavior of some actions and resolvers of Emmet.",
           "properties": {
             "css.intUnit": {
               "type": "string",
-              "default": "px",
-              "description": "%emmetPreferencesIntUnit%"
+              "default": "px"
             },
             "css.floatUnit": {
               "type": "string",
-              "default": "em",
-              "description": "%emmetPreferencesFloatUnit%"
+              "default": "em"
             },
             "css.propertyEnd": {
               "type": "string",
-              "default": ";",
-              "description": "%emmetPreferencesCssAfter%"
+              "default": ";"
             },
             "sass.propertyEnd": {
               "type": "string",
-              "default": "",
-              "description": "%emmetPreferencesSassAfter%"
+              "default": ""
             },
             "stylus.propertyEnd": {
               "type": "string",
-              "default": "",
-              "description": "%emmetPreferencesStylusAfter%"
+              "default": ""
             },
             "css.valueSeparator": {
               "type": "string",
-              "default": ": ",
-              "description": "%emmetPreferencesCssBetween%"
+              "default": ": "
             },
             "sass.valueSeparator": {
               "type": "string",
-              "default": ": ",
-              "description": "%emmetPreferencesSassBetween%"
+              "default": ": "
             },
             "stylus.valueSeparator": {
               "type": "string",
-              "default": " ",
-              "description": "%emmetPreferencesStylusBetween%"
+              "default": " "
             },
             "bem.elementSeparator": {
               "type": "string",
-              "default": "__",
-              "description": "%emmetPreferencesBemElementSeparator%"
+              "default": "__"
             },
             "bem.modifierSeparator": {
               "type": "string",
-              "default": "_",
-              "description": "%emmetPreferencesBemModifierSeparator%"
+              "default": "_"
             },
             "filter.commentBefore": {
               "type": "string",
-              "default": "",
-              "description": "%emmetPreferencesFilterCommentBefore%"
+              "default": ""
             },
             "filter.commentAfter": {
               "type": "string",
-              "default": "\n<!-- /[#ID][.CLASS] -->",
-              "description": "%emmetPreferencesFilterCommentAfter%"
+              "default": "\n<!-- /[#ID][.CLASS] -->"
             },
             "filter.commentTrigger": {
               "type": "array",
               "default": [
                 "id",
                 "class"
-              ],
-              "description": "%emmetPreferencesFilterCommentTrigger%"
+              ]
             },
             "format.noIndentTags": {
               "type": "array",
               "default": [
                 "html"
-              ],
-              "description": "%emmetPreferencesFormatNoIndentTags%"
+              ]
             },
             "format.forceIndentationForTags": {
               "type": "array",
               "default": [
                 "body"
-              ],
-              "description": "%emmetPreferencesFormatForceIndentTags%"
+              ]
             },
             "profile.allowCompactBoolean": {
               "type": "boolean",
-              "default": false,
-              "description": "%emmetPreferencesAllowCompactBoolean%"
-            },
-            "css.webkitProperties": {
-              "type": "string",
-              "default": null,
-              "markdownDescription": "%emmetPreferencesCssWebkitProperties%"
-            },
-            "css.mozProperties": {
-              "type": "string",
-              "default": null,
-              "markdownDescription": "%emmetPreferencesCssMozProperties%"
-            },
-            "css.oProperties": {
-              "type": "string",
-              "default": null,
-              "markdownDescription": "%emmetPreferencesCssOProperties%"
-            },
-            "css.msProperties": {
-              "type": "string",
-              "default": null,
-              "markdownDescription": "%emmetPreferencesCssMsProperties%"
+              "default": false
             },
             "css.fuzzySearchMinScore": {
               "type": "number",
-              "default": 0.3,
-              "description": "%emmetPreferencesCssFuzzySearchMinScore%"
+              "default": 0.3
             }
           }
         },
         "emmet.optimizeStylesheetParsing": {
           "type": "boolean",
           "default": true,
-          "markdownDescription": "%emmetOptimizeStylesheetParsing%"
+          "markdownDescription": "When set to `false`, the whole file is parsed to determine if current position is valid for expanding Emmet abbreviations. When set to `true`, only the content around the current position in css/scss/less files is parsed."
         }
       }
     }
