@@ -56,7 +56,7 @@ export class DefaultCompletionItemProvider implements CompletionItemProvider {
 
     const helper = getEmmetHelper()
     let validateLocation = syntax === 'html' || syntax === 'jsx' || syntax === 'xml'
-    let rootNode: Node | undefined = undefined
+    let rootNode: Node
     let currentNode: Node | null = null
 
     if (document.languageId === 'html') {

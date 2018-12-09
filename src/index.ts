@@ -3,10 +3,10 @@ import { DefaultCompletionItemProvider } from './defaultCompletionProvider'
 import { Disposable } from 'vscode-languageserver-protocol'
 import { LANGUAGE_MODES, getMappingForIncludedLanguages } from './util'
 
-export function activate(context: ExtensionContext) {
+export function activate(context: ExtensionContext): void {
   registerCompletionProviders(context)
 
-  context.subscriptions.push(workspace.onDidChangeConfiguration((e) => {
+  context.subscriptions.push(workspace.onDidChangeConfiguration(e => {
     if (e.affectsConfiguration('emmet.includeLanguages')) {
       registerCompletionProviders(context)
     }
@@ -19,7 +19,7 @@ export function activate(context: ExtensionContext) {
 const languageMappingForCompletionProviders: Map<string, string> = new Map<string, string>()
 const completionProvidersMapping: Map<string, Disposable> = new Map<string, Disposable>()
 
-function registerCompletionProviders(context: ExtensionContext) {
+function registerCompletionProviders(context: ExtensionContext): void {
   let completionProvider = new DefaultCompletionItemProvider()
   let includedLanguages = getMappingForIncludedLanguages()
 
