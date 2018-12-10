@@ -22,8 +22,7 @@ export class DefaultCompletionItemProvider implements CompletionItemProvider {
     return completionResult.then(completionList => {
       if (!completionList || !completionList.items.length) {
         this.lastCompletionType = undefined
-        completionList.isIncomplete = false
-        return completionList
+        return null
       }
       const item = completionList.items[0]
       const expandedText = item.documentation ? item.documentation.toString() : ''
