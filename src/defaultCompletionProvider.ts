@@ -105,7 +105,6 @@ export class DefaultCompletionItemProvider implements CompletionItemProvider {
       currentNode = getNode(rootNode, position, true)
     }
 
-
     if (validateLocation && !isValidLocationForEmmetAbbreviation(document, rootNode, currentNode, syntax, position, extractAbbreviationResults.abbreviationRange)) {
       return
     }
@@ -129,6 +128,7 @@ export class DefaultCompletionItemProvider implements CompletionItemProvider {
 
       let result = helper.doComplete(document, position, syntax, getEmmetConfiguration(syntax!))
       let newItems: CompletionItem[] = []
+      let { option } = context as any
       if (result && result.items) {
         result.items.forEach((item: any) => {
           let newItem: CompletionItem = { label: item.label }
@@ -140,7 +140,7 @@ export class DefaultCompletionItemProvider implements CompletionItemProvider {
             range: Range.create(oldrange.start.line, oldrange.start.character, oldrange.end.line, oldrange.end.character),
             newText: item.textEdit.newText
           }
-          newItem.filterText = (item.filterText || item.label).replace(/^[^\w]+/, '')
+          newItem.filterText = option ? option.input : item.word
           newItem.sortText = item.sortText
           newItems.push(newItem)
         })
