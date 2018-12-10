@@ -151,7 +151,7 @@ const star = 42
 export function parsePartialStylesheet(document: TextDocument, position: Position): Stylesheet | undefined {
   const isCSS = document.languageId === 'css'
   let startPosition = Position.create(0, 0)
-  let lastLine = document.getText(Range.create(document.lineCount - 1, 0, document.lineCount, 0)).trim()
+  let lastLine = document.getText(Range.create(document.lineCount - 1, 0, document.lineCount, 0)).replace(/\n$/, '')
   let endPosition = Position.create(document.lineCount - 1, lastLine.length)
   const limitCharacter = document.offsetAt(position) - 5000
   const limitPosition = limitCharacter > 0 ? document.positionAt(limitCharacter) : startPosition
