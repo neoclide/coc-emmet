@@ -37,7 +37,7 @@ function registerCompletionProviders(context: ExtensionContext): void {
       completionProvidersMapping.delete(language)
     }
 
-    const provider = languages.registerCompletionItemProvider(`emmet-${language}`, 'EM', null, completionProvider, LANGUAGE_MODES[includedLanguages[language]])
+    const provider = languages.registerCompletionItemProvider(`emmet-${language}`, 'EM', [language], completionProvider, LANGUAGE_MODES[includedLanguages[language]])
     context.subscriptions.push(provider)
 
     languageMappingForCompletionProviders.set(language, includedLanguages[language])
@@ -46,7 +46,7 @@ function registerCompletionProviders(context: ExtensionContext): void {
 
   Object.keys(LANGUAGE_MODES).forEach(language => {
     if (!languageMappingForCompletionProviders.has(language)) {
-      const provider = languages.registerCompletionItemProvider(`emmet-${language}`, 'EM', null, completionProvider, LANGUAGE_MODES[language])
+      const provider = languages.registerCompletionItemProvider(`emmet-${language}`, 'EM', [language], completionProvider, LANGUAGE_MODES[language])
       context.subscriptions.push(provider)
 
       languageMappingForCompletionProviders.set(language, language)
