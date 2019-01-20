@@ -1,6 +1,5 @@
 import { languages, workspace, ExtensionContext } from 'coc.nvim'
 import { DefaultCompletionItemProvider } from './defaultCompletionProvider'
-import { Disposable } from 'vscode-languageserver-protocol'
 import { LANGUAGE_MODES, getMappingForIncludedLanguages } from './util'
 
 export function activate(context: ExtensionContext): void {
@@ -11,46 +10,33 @@ export function activate(context: ExtensionContext): void {
       registerCompletionProviders(context)
     }
   }))
+
+  workspace.onDidOpenTextDocument(() => {
+    registerCompletionProviders(context)
+  }, null, context.subscriptions)
 }
 
 /**
  * Holds any registered completion providers by their language strings
  */
-const languageMappingForCompletionProviders: Map<string, string> = new Map<string, string>()
-const completionProvidersMapping: Map<string, Disposable> = new Map<string, Disposable>()
-
+const registeredModes: Set<string> = new Set()
 function registerCompletionProviders(context: ExtensionContext): void {
   let completionProvider = new DefaultCompletionItemProvider()
   let includedLanguages = getMappingForIncludedLanguages()
 
-  Object.keys(includedLanguages).forEach(language => {
-    if (languageMappingForCompletionProviders.has(language) && languageMappingForCompletionProviders.get(language) === includedLanguages[language]) {
-      return
-    }
-
-    if (languageMappingForCompletionProviders.has(language)) {
-      const mapping = completionProvidersMapping.get(language)
-      if (mapping) {
-        mapping.dispose()
+  let current_languages = workspace.filetypes
+  for (let language of current_languages) {
+    let emmetMode = Object.keys(LANGUAGE_MODES).find(s => s == language) || includedLanguages[language]
+    if (!emmetMode || registeredModes.has(emmetMode)) continue
+    registeredModes.add(emmetMode)
+    let filetypes = [emmetMode]
+    for (let key of Object.keys(includedLanguages)) {
+      let val = includedLanguages[key]
+      if (val == emmetMode && filetypes.indexOf(val) == -1) {
+        filetypes.push(val)
       }
-      languageMappingForCompletionProviders.delete(language)
-      completionProvidersMapping.delete(language)
     }
-
-    const provider = languages.registerCompletionItemProvider(`emmet-${language}`, 'EM', [language], completionProvider, LANGUAGE_MODES[includedLanguages[language]])
+    const provider = languages.registerCompletionItemProvider(`emmet-${emmetMode}`, 'EM', filetypes, completionProvider, LANGUAGE_MODES[emmetMode])
     context.subscriptions.push(provider)
-
-    languageMappingForCompletionProviders.set(language, includedLanguages[language])
-    completionProvidersMapping.set(language, provider)
-  })
-
-  Object.keys(LANGUAGE_MODES).forEach(language => {
-    if (!languageMappingForCompletionProviders.has(language)) {
-      const provider = languages.registerCompletionItemProvider(`emmet-${language}`, 'EM', [language], completionProvider, LANGUAGE_MODES[language])
-      context.subscriptions.push(provider)
-
-      languageMappingForCompletionProviders.set(language, language)
-      completionProvidersMapping.set(language, provider)
-    }
-  })
+  }
 }

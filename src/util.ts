@@ -72,7 +72,7 @@ export function validate(allowStylesheet: boolean = true): boolean {
   return true
 }
 
-export function getMappingForIncludedLanguages(): any {
+export function getMappingForIncludedLanguages(): { [index: string]: string } {
   // Explicitly map languages that have built-in grammar in VS Code to their parent language
   // to get emmet completion support
   // For other languages, users will have to use `emmet.includeLanguages` or
