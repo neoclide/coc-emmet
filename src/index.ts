@@ -21,7 +21,6 @@ export function activate(context: ExtensionContext): void {
  */
 const registeredModes: Set<string> = new Set()
 function registerCompletionProviders(context: ExtensionContext): void {
-  let completionProvider = new DefaultCompletionItemProvider()
   let includedLanguages = getMappingForIncludedLanguages()
 
   let current_languages = workspace.filetypes
@@ -36,6 +35,7 @@ function registerCompletionProviders(context: ExtensionContext): void {
         filetypes.push(val)
       }
     }
+    let completionProvider = new DefaultCompletionItemProvider()
     const provider = languages.registerCompletionItemProvider(`emmet-${emmetMode}`, 'EM', filetypes, completionProvider, LANGUAGE_MODES[emmetMode])
     context.subscriptions.push(provider)
   }

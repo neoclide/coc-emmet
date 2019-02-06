@@ -59,7 +59,7 @@ export const LANGUAGE_MODES: { [id: string]: string[] } = {
 }
 
 export function isStyleSheet(syntax: string): boolean {
-  let stylesheetSyntaxes = ['css', 'scss', 'sass', 'less', 'stylus']
+  let stylesheetSyntaxes = ['css', 'scss', 'sass', 'less', 'stylus', 'wxss']
   return (stylesheetSyntaxes.indexOf(syntax) > -1)
 }
 

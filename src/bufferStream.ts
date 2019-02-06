@@ -64,8 +64,14 @@ export class DocumentStreamReader {
     if (this.eof()) {
       return NaN
     }
-    const line = this.document.getText(Range.create(this.pos.line, 0, this.pos.line + 1, 0)).replace(/\n$/, '')
-    return this.pos.character < line.length ? line.charCodeAt(this.pos.character) : this._eol.charCodeAt(this.pos.character - line.length)
+    const line = this.getline(this.pos.line)
+    return this.pos.character < line.length ? line.charCodeAt(this.pos.character) : this._eol.charCodeAt(0)
+  }
+
+  getline(line: number): string {
+    let content = this.document.getText()
+    let lines = content.split('\n')
+    return lines[line] || ''
   }
 
 	/**
@@ -76,7 +82,7 @@ export class DocumentStreamReader {
     if (this.eof()) {
       return NaN
     }
-    const line = this.document.getText(Range.create(this.pos.line, 0, this.pos.line + 1, 0)).replace(/\n$/, '')
+    const line = this.getline(this.pos.line)
     let code: number
     if (this.pos.character < line.length) {
       code = line.charCodeAt(this.pos.character)
@@ -143,7 +149,7 @@ export class DocumentStreamReader {
 	 * Returns line length of given row, including line ending
 	 */
   _lineLength(row: number): number {
-    const line = this.document.getText(Range.create(row, 0, row + 1, 0)).replace(/\n$/, '')
+    const line = this.getline(row)
     return line.length
   }
 
