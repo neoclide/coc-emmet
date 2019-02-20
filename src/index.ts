@@ -29,6 +29,9 @@ function registerCompletionProviders(context: ExtensionContext): void {
     if (!emmetMode || registeredModes.has(emmetMode)) continue
     registeredModes.add(emmetMode)
     let filetypes = [emmetMode]
+    if (emmetMode != language) {
+      filetypes.push(language)
+    }
     for (let key of Object.keys(includedLanguages)) {
       let val = includedLanguages[key]
       if (val == emmetMode && filetypes.indexOf(val) == -1) {
