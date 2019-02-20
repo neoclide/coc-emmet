@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 import { CompletionItemProvider, workspace } from 'coc.nvim'
 import { Node, Stylesheet } from 'EmmetNode'
-import { CancellationToken, CompletionContext, CompletionItem, CompletionList, CompletionTriggerKind, InsertTextFormat, Position, Range, TextDocument } from 'vscode-languageserver-protocol'
+import { CancellationToken, CompletionContext, CompletionItem, CompletionList, CompletionTriggerKind, InsertTextFormat, Position, Range, TextDocument, CompletionItemKind } from 'vscode-languageserver-protocol'
 import { isValidLocationForEmmetAbbreviation } from './abbreviationActions'
 import { getEmbeddedCssNodeIfAny, getEmmetConfiguration, getEmmetHelper, getEmmetMode, getMappingForIncludedLanguages, getNode, isStyleAttribute, isStyleSheet, parseDocument, parsePartialStylesheet } from './util'
 
@@ -139,6 +139,9 @@ export class DefaultCompletionItemProvider implements CompletionItemProvider {
           newItem.textEdit = {
             range: Range.create(oldrange.start.line, oldrange.start.character, oldrange.end.line, oldrange.end.character),
             newText: item.textEdit.newText
+          }
+          if (emmetConfig['showSuggestionsAsSnippets'] === true) {
+            newItem.kind = CompletionItemKind.Snippet
           }
           newItem.filterText = option ? option.input : item.word
           newItem.sortText = item.sortText

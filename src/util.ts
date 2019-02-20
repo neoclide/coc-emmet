@@ -10,6 +10,7 @@ import { Node, HtmlNode, CssToken, Property, Rule, Stylesheet } from 'EmmetNode'
 import { DocumentStreamReader, comparePosition } from './bufferStream'
 
 let _emmetHelper: any
+let _currentExtensionsPath: string | undefined
 
 export { comparePosition }
 
@@ -33,9 +34,14 @@ export function getEmmetHelper(): any {
 /**
  * Update Emmet Helper to use user snippets from the extensionsPath setting
  */
-export function updateEmmetExtensionsPath() {
+export function updateEmmetExtensionsPath(): void {
   if (!_emmetHelper) {
     return
+  }
+  let extensionsPath = workspace.getConfiguration('emmet')['extensionsPath']
+  if (_currentExtensionsPath !== extensionsPath) {
+    _currentExtensionsPath = extensionsPath
+    _emmetHelper.updateExtensionsPath(extensionsPath, workspace.rootPath).then(null, (err: string) => workspace.showMessage(err, 'error'))
   }
 }
 

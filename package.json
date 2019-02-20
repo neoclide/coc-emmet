@@ -69,6 +69,16 @@
           ],
           "description": "An array of languages where Emmet abbreviations should not be expanded."
         },
+        "emmet.extensionsPath": {
+          "type": "string",
+          "default": null,
+          "description": "Path to a folder containing Emmet profiles and snippets."
+        },
+        "emmet.showSuggestionsAsSnippets": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Show emmet completion items as snippet kind."
+        },
         "emmet.preferences": {
           "type": "object",
           "default": {},
