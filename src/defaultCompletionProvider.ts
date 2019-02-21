@@ -144,6 +144,7 @@ export class DefaultCompletionItemProvider implements CompletionItemProvider {
             newItem.kind = CompletionItemKind.Snippet
           }
           newItem.filterText = option ? option.input : item.word
+          newItem.data = { word: newItem.filterText }
           newItem.sortText = item.sortText
           newItems.push(newItem)
         })
