@@ -173,20 +173,20 @@
   "license": "MIT",
   "devDependencies": {
     "@chemzqm/tsconfig": "^0.0.3",
-    "@chemzqm/tslint-config": "^1.0.17",
-    "@types/node": "^10.11.7",
-    "typescript": "^3.1.2",
-    "coc.nvim": "^0.0.23",
-    "tslint": "^5.11.0",
-    "rimraf": "^2.6.2"
+    "@chemzqm/tslint-config": "^1.0.18",
+    "@types/node": "^10.14.7",
+    "typescript": "^3.4.4",
+    "coc.nvim": "^0.0.67",
+    "tslint": "^5.16.0",
+    "rimraf": "^2.6.3"
   },
   "dependencies": {
     "@emmetio/css-parser": "ramya-rao-a/css-parser#vscode",
     "@emmetio/html-matcher": "^0.3.3",
     "@emmetio/math-expression": "^0.1.1",
-    "vscode-emmet-helper": "^1.2.12",
+    "vscode-emmet-helper": "^1.2.15",
     "tslib": "^1.9.3",
-    "vscode-languageserver-protocol": "^3.13.0",
+    "vscode-languageserver-protocol": "^3.15.0-next.5",
     "vscode-uri": "^1.0.6"
   }
 }
