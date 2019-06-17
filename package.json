@@ -190,5 +190,8 @@
   },
   "dependencies": {
     "vscode-emmet-helper": "^1.2.15"
+  },
+  "resolutions": {
+    "vscode-emmet-helper/vscode-languageserver-types": "3.6.0-next.1"
   }
 }
