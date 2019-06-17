@@ -9,7 +9,7 @@
   },
   "scripts": {
     "clean": "rimraf lib",
-    "build": "tsc -p tsconfig.json",
+    "build": "webpack",
     "prepare": "npx npm-run-all clean build"
   },
   "activationEvents": [
@@ -175,18 +175,20 @@
     "@chemzqm/tsconfig": "^0.0.3",
     "@chemzqm/tslint-config": "^1.0.18",
     "@types/node": "^10.14.7",
-    "typescript": "^3.4.4",
     "coc.nvim": "^0.0.67",
+    "rimraf": "^2.6.3",
+    "ts-loader": "^6.0.3",
     "tslint": "^5.16.0",
-    "rimraf": "^2.6.3"
-  },
-  "dependencies": {
+    "typescript": "^3.4.4",
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4",
     "@emmetio/css-parser": "ramya-rao-a/css-parser#vscode",
     "@emmetio/html-matcher": "^0.3.3",
     "@emmetio/math-expression": "^0.1.1",
-    "vscode-emmet-helper": "^1.2.15",
-    "tslib": "^1.9.3",
     "vscode-languageserver-protocol": "^3.15.0-next.5",
     "vscode-uri": "^1.0.6"
+  },
+  "dependencies": {
+    "vscode-emmet-helper": "^1.2.15"
   }
 }
