@@ -4,6 +4,12 @@
   "description": "emmet extension for coc",
   "main": "lib/index.js",
   "publisher": "chemzqm",
+  "keywords": [
+    "coc.nvim",
+    "emmet",
+    "html",
+    "css"
+  ],
   "engines": {
     "coc": "^0.0.29"
   },
