@@ -171,6 +171,10 @@
           "type": "boolean",
           "default": true,
           "markdownDescription": "When set to `false`, the whole file is parsed to determine if current position is valid for expanding Emmet abbreviations. When set to `true`, only the content around the current position in css/scss/less files is parsed."
+        },
+        "emmet.priority": {
+          "type": "integer",
+          "default": 3
         }
       }
     }
