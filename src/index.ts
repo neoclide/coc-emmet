@@ -24,6 +24,7 @@ function registerCompletionProviders(context: ExtensionContext): void {
   let includedLanguages = getMappingForIncludedLanguages()
 
   let current_languages = workspace.filetypes
+  const emmetConfig = workspace.getConfiguration('emmet')
   for (let language of current_languages) {
     let emmetMode = Object.keys(LANGUAGE_MODES).find(s => s == language) || includedLanguages[language]
     if (!emmetMode || registeredModes.has(emmetMode)) continue
@@ -39,7 +40,7 @@ function registerCompletionProviders(context: ExtensionContext): void {
       }
     }
     let completionProvider = new DefaultCompletionItemProvider()
-    const provider = languages.registerCompletionItemProvider(`emmet-${emmetMode}`, 'EM', filetypes, completionProvider, LANGUAGE_MODES[emmetMode])
+    const provider = languages.registerCompletionItemProvider(`emmet-${emmetMode}`, 'EM', filetypes, completionProvider, LANGUAGE_MODES[emmetMode], emmetConfig.get('priority', 3))
     context.subscriptions.push(provider)
   }
 }
