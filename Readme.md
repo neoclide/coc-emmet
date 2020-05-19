@@ -5,6 +5,9 @@ Emmet completion support for [coc.nvim](https://github.com/neoclide/coc.nvim)
 Fork of emmet extension from [VSCode](https://github.com/Microsoft/vscode) with
 only completion support.
 
+**Note**: this. extension does completion support for emmet only, you should use
+https://github.com/mattn/emmet-vim
+
 ## Install
 
 In your vim/neovim, run command:
