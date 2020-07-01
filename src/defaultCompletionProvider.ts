@@ -12,6 +12,15 @@ export class DefaultCompletionItemProvider implements CompletionItemProvider {
 
   private lastCompletionType: string | undefined
 
+  public resolveCompletionItem(item: CompletionItem): CompletionItem {
+    if (item.data) {
+      const { textEdit } = item.data
+      item.textEdit = textEdit
+      delete item.data.textEdit
+    }
+    return item
+  }
+
   public provideCompletionItems(document: TextDocument, position: Position, _: CancellationToken, context: CompletionContext): Thenable<CompletionList | undefined> | undefined {
     const completionResult = this.provideCompletionItemsInternal(document, position, context)
     if (!completionResult) {
@@ -98,7 +107,7 @@ export class DefaultCompletionItemProvider implements CompletionItemProvider {
     if (isStyleSheet(document.languageId) && context.triggerKind !== CompletionTriggerKind.TriggerForIncompleteCompletions) {
       validateLocation = true
       let usePartialParsing = workspace.getConfiguration('emmet')['optimizeStylesheetParsing'] === true
-      rootNode = usePartialParsing && document.lineCount > 1000 ? parsePartialStylesheet(document, position) : <Stylesheet>parseDocument(document, false)
+      rootNode = usePartialParsing && document.lineCount > 1000 ? parsePartialStylesheet(document, position) : parseDocument(document, false) as Stylesheet
       if (!rootNode) {
         return
       }
@@ -136,7 +145,7 @@ export class DefaultCompletionItemProvider implements CompletionItemProvider {
           newItem.detail = item.detail
           newItem.insertTextFormat = InsertTextFormat.Snippet
           let oldrange = item.textEdit.range
-          newItem.textEdit = {
+          const textEdit = {
             range: Range.create(oldrange.start.line, oldrange.start.character, oldrange.end.line, oldrange.end.character),
             newText: item.textEdit.newText
           }
@@ -144,7 +153,10 @@ export class DefaultCompletionItemProvider implements CompletionItemProvider {
             newItem.kind = CompletionItemKind.Snippet
           }
           newItem.filterText = option ? option.input : item.word
-          newItem.data = { word: newItem.filterText }
+          newItem.data = {
+            word: newItem.filterText,
+            textEdit
+          }
           newItem.sortText = item.sortText
           newItems.push(newItem)
         })
