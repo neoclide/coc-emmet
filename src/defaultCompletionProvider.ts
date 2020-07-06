@@ -2,11 +2,11 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { CompletionItemProvider, workspace } from 'coc.nvim'
-import { Node, Stylesheet } from 'EmmetNode'
-import { CancellationToken, CompletionContext, CompletionItem, CompletionList, CompletionTriggerKind, InsertTextFormat, Position, Range, TextDocument, CompletionItemKind } from 'vscode-languageserver-protocol'
-import { isValidLocationForEmmetAbbreviation } from './abbreviationActions'
-import { getEmbeddedCssNodeIfAny, getEmmetConfiguration, getEmmetHelper, getEmmetMode, getMappingForIncludedLanguages, getNode, isStyleAttribute, isStyleSheet, parseDocument, parsePartialStylesheet } from './util'
+import {CompletionItemProvider, workspace} from 'coc.nvim'
+import {Node, Stylesheet} from 'EmmetNode'
+import {CancellationToken, CompletionContext, CompletionItem, CompletionList, CompletionTriggerKind, InsertTextFormat, Position, Range, TextDocument, CompletionItemKind} from 'vscode-languageserver-protocol'
+import {isValidLocationForEmmetAbbreviation} from './abbreviationActions'
+import {getEmbeddedCssNodeIfAny, getEmmetConfiguration, getEmmetHelper, getEmmetMode, getMappingForIncludedLanguages, getNode, isStyleAttribute, isStyleSheet, parseDocument, parsePartialStylesheet} from './util'
 
 export class DefaultCompletionItemProvider implements CompletionItemProvider {
 
@@ -14,7 +14,7 @@ export class DefaultCompletionItemProvider implements CompletionItemProvider {
 
   public resolveCompletionItem(item: CompletionItem): CompletionItem {
     if (item.data) {
-      const { textEdit } = item.data
+      const {textEdit} = item.data
       item.textEdit = textEdit
       delete item.data.textEdit
     }
@@ -137,10 +137,10 @@ export class DefaultCompletionItemProvider implements CompletionItemProvider {
 
       let result = helper.doComplete(document, position, syntax, getEmmetConfiguration(syntax!))
       let newItems: CompletionItem[] = []
-      let { option } = context as any
+      let {option} = context as any
       if (result && result.items) {
         result.items.forEach((item: any) => {
-          let newItem: CompletionItem = { label: item.label }
+          let newItem: CompletionItem = {label: item.label}
           newItem.documentation = item.documentation
           newItem.detail = item.detail
           newItem.insertTextFormat = InsertTextFormat.Snippet
@@ -163,8 +163,9 @@ export class DefaultCompletionItemProvider implements CompletionItemProvider {
       }
       return {
         items: newItems,
+        engross: false,
         isIncomplete: true
-      }
+      } as any
     })
   }
 }
