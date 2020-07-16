@@ -174,7 +174,8 @@
         },
         "emmet.priority": {
           "type": "integer",
-          "default": 3
+          "default": 3,
+          "description": "Priority of emmet completion source, change to 100 for higher priority than languageserver."
         }
       }
     }
