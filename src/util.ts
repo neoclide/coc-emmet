@@ -2,7 +2,7 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { workspace } from 'coc.nvim'
+import { workspace, window } from 'coc.nvim'
 import { TextDocument, Range, Position } from 'vscode-languageserver-protocol'
 import parse from '@emmetio/html-matcher'
 import parseStylesheet from '@emmetio/css-parser'
@@ -41,7 +41,7 @@ export function updateEmmetExtensionsPath(): void {
   let extensionsPath = workspace.getConfiguration('emmet')['extensionsPath']
   if (_currentExtensionsPath !== extensionsPath) {
     _currentExtensionsPath = extensionsPath
-    _emmetHelper.updateExtensionsPath(extensionsPath, workspace.rootPath).then(null, (err: string) => workspace.showMessage(err, 'error'))
+    _emmetHelper.updateExtensionsPath(extensionsPath, workspace.rootPath).then(null, (err: string) => window.showMessage(err, 'error'))
   }
 }
 
@@ -67,15 +67,6 @@ export const LANGUAGE_MODES: { [id: string]: string[] } = {
 export function isStyleSheet(syntax: string): boolean {
   let stylesheetSyntaxes = ['css', 'scss', 'sass', 'less', 'stylus', 'wxss']
   return (stylesheetSyntaxes.indexOf(syntax) > -1)
-}
-
-export function validate(allowStylesheet: boolean = true): boolean {
-  let doc = workspace.getDocument(workspace.bufnr)
-  if (!doc) return false
-  if (!allowStylesheet && isStyleSheet(doc.filetype)) {
-    return false
-  }
-  return true
 }
 
 export function getMappingForIncludedLanguages(): { [index: string]: string } {
