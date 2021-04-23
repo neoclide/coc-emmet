@@ -16,6 +16,11 @@ In your vim/neovim, run command:
 :CocInstall coc-emmet
 ```
 
+## Usage
+
+- `<C-n>` and `<C-p>` to choose a completion option
+- `<C-y>` to paste a picked completion
+
 ## Options
 
 You can set these properties on your `coc-settings.json` file to customize behavior.
