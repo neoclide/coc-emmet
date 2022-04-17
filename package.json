@@ -186,7 +186,7 @@
     "@chemzqm/tsconfig": "^0.0.3",
     "@chemzqm/tslint-config": "^1.0.18",
     "@types/node": "^10.14.7",
-    "coc.nvim": "0.0.79-next.4",
+    "coc.nvim": "^0.0.80",
     "rimraf": "^2.6.3",
     "ts-loader": "^6.0.3",
     "tslint": "^5.16.0",
