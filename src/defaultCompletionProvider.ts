@@ -2,7 +2,7 @@
  *  Copyright (c) Microsoft Corporation. All rights reserved.
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import {CompletionItemProvider, workspace} from 'coc.nvim'
+import {CompletionItemProvider, Thenable, workspace} from 'coc.nvim'
 import {Node, Stylesheet} from 'EmmetNode'
 import {CancellationToken, CompletionContext, CompletionItem, CompletionList, CompletionTriggerKind, InsertTextFormat, Position, Range, TextDocument, CompletionItemKind} from 'vscode-languageserver-protocol'
 import {isValidLocationForEmmetAbbreviation} from './abbreviationActions'

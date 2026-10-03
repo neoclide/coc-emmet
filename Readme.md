@@ -39,6 +39,18 @@ You can set these properties on your `coc-settings.json` file to customize behav
 | `emmet.priority`                    | Priority of Emmet completion source, change to `100` for higher priority than languageserver.                                                                                                                                 | `3`            |
 | `emmet.preferences`                 | Preferences used to modify behavior of some actions and resolvers of Emmet.                                                                                                                                                   | `{}`           |
 
+## Development
+
+Use Node.js 24 and npm 11.9.0 for development.
+
+```sh
+npm ci
+npm run build
+npm run typecheck
+```
+
+Commit `package-lock.json` when updating dependencies.
+
 ## LICENSE
 
 MIT
